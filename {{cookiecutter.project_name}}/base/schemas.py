@@ -1,4 +1,5 @@
 import datetime
+import decimal
 
 import mongoengine
 import pydantic
