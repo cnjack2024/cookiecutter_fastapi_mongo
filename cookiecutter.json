@@ -1,0 +1,8 @@
+{
+    "name": "hello",
+    "project_name": "{{ cookiecutter.name.lower().replace(' ', '_').replace('-', '_') }}",
+    "database_name": "{{ cookiecutter.project_name }}",
+    "redis_name": "{{ cookiecutter.project_name }}",
+    "venv": false,
+    "_copy_without_render": ["cmd"]
+}
