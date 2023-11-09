@@ -653,13 +653,15 @@ class Generate:
                 登录
                 """
 
+                import hashlib
+
                 from fastapi import APIRouter, Request
 
                 from base.app import limiter
                 from base.auth import authentication
                 from base.exception import *
                 from base.redis import Redis
-                from base.util import decode_aes, make_token, sha256_hmac
+                from base.util import decode_aes, make_token
 
                 from app.{{ app }}.schemas import *
 
@@ -706,7 +708,11 @@ class Generate:
                         token = make_token(str(auth_user.id), "{{ app }}")
 
                         with Redis() as conn:
-                            conn.set(sha256_hmac(token), str(auth_user.id), 30 * 60)
+                            conn.set(
+                                hashlib.sha256(token.encode()).hexdigest(),
+                                str(auth_user.id),
+                                30 * 60,
+                            )
 
                         return LoginSuccessModel(token=token)
 
