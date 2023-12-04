@@ -8,10 +8,12 @@ class AuthenticationError(AuthenticationError):
         self.msg = msg
         self.status_code = HTTP_401_UNAUTHORIZED
 
+
 class AuthenticationExpired(AuthenticationError):
     def __init__(self, msg: str = "认证过期"):
         self.msg = msg
         self.status_code = HTTP_401_UNAUTHORIZED
+
 
 class AuthenticationForbidden(AuthenticationError):
     def __init__(self, msg: str = "禁止访问"):
